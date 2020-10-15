@@ -1,0 +1,25 @@
+Sesiune
+
+HttpServletRequest httpServletRequest
+
+    @GetMapping("dashboard")
+    public ModelAndView dashboard(HttpServletRequest httpServletRequest){
+        //cum verific daca user-ul este logat sau nu?
+        HttpSession httpSession = httpServletRequest.getSession();
+        Object logged = httpSession.getAttribute("logged");
+
+        if(logged == null){
+            return new ModelAndView("redirect:index.html");
+        }
+
+        Boolean log = (Boolean) logged;
+        if(!logged){
+         return new ModelAndView("redirect:index.html");
+        }
+        return new ModelAndView("dashboard");
+    }
+
+    in /login adauga HttpServletRequest
+    si dupa la logare, httpServletRequest.getSession().setAttribute("logged", true)
+
+@SessionScope
